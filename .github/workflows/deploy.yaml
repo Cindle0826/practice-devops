@@ -72,6 +72,15 @@ jobs:
       - name: fetch branch content
         uses: actions/checkout@v4
 
+      - name: check current directory
+        run: ls -la
+
+      - name: check gradle version
+        run: gradle -version
+
+      - name: build with gradle
+        run: gradle build
+
       - name: connect docker
         uses: docker/login-action@v3
         with:
