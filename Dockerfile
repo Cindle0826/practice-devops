@@ -10,4 +10,4 @@ WORKDIR /app
 RUN ls -la /app
 # /app/build/app.jar 同等 ./app.jar
 COPY --from=gradle_builder /app/build/libs/*.jar ./app.jar
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
