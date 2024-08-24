@@ -3,14 +3,9 @@ on:
   push
 
 # 工作
-jobs:
-  job1:
+jbos:
+  ci:
     runs-on: ubuntu-latest
     steps:
-      - run: pwd
-      - run: ls
-  job2:
-    runs-on: windlws-latest
-    steps:
-      - run: echo "hello ~"
+      - run: gradle -version
       - run: java -version
