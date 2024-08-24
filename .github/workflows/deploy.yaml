@@ -54,7 +54,7 @@ jobs:
             echo "Application did not start successfully"
             exit 1
           fi
-          shell: bash
+        shell: bash
 
       #lsof: 代表 "list open files"（列出打開的文件）。這是一個用於列出被進程打開的文件信息的命令。
       #-t: 這個選項告訴 lsof 生成簡潔的輸出，只包括使用指定文件的進程 ID（PID）。
