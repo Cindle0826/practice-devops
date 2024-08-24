@@ -96,11 +96,30 @@ jobs:
       - name: connect docker
         uses: docker/login-action@v3
         with:
-          username: ${{secrets.DOCKERHUB_USERNAME}}
-          password: ${{secrets.DOCKERHUB_TOKEN}}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: push docker repository
         uses: docker/build-push-action@v6
         with:
           push: 'true'
           tags: yihao0826/practice-devops:latest
+
+  cd:
+    needs: push-docker-hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: fetch branch content
+        uses: actions/checkout@v4
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deploy to remote server
+        run: |
+          ssh -o StrictHostKeyChecking=no cindle@${{ secrets.SSH_REMOTE_SERVER }} 'bash -s' << 'EOF'
+            sudo docker pull yihao0826/practice-devops:latest
+            sudo docker run -d -p 8080:8080 yihao0826/practice-devops:latest
+          EOF
