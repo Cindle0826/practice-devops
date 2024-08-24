@@ -16,6 +16,8 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '17'
+
+      - name: check java version
         run: java -version
 
       - name: build with gradle
