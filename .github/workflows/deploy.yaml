@@ -10,7 +10,7 @@ jobs:
       - run: pwd
       - run: ls
   job2:
-    runs-on: ubuntu-latest
+    runs-on: windlws-latest
     steps:
-      - run: macos-latest
-      - run: ./gradlew -v
+      - run: echo "hello ~"
+      - run: java -version
