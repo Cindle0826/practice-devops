@@ -23,14 +23,14 @@ jobs:
       - name: check java version
         run: java -version
 
-      - name: check current directory
-        run: ls -la
-
       - name: check gradle version
         run: gradle -version
 
       - name: build with gradle
         run: gradle build
+
+      - name: check current directory
+        run: ls -la
 
       - name: build with Spring Boot
         run: gradle bootJar
@@ -81,14 +81,14 @@ jobs:
       - name: check java version
         run: java -version
 
-      - name: check current directory
-        run: ls -la
-
       - name: check gradle version
         run: gradle -version
 
       - name: build with gradle
         run: gradle build
+
+      - name: check current directory
+        run: ls -la
 
       - name: connect docker
         uses: docker/login-action@v3
