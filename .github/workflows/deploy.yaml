@@ -23,16 +23,18 @@ jobs:
       - name: check current directory
         run: ls -la
 
-      - name: check gradle version
-        run: sudo ./gradlew -version
+      - run: gradle -v
 
-      - name: build with gradle
-        run: sudo ./gradlew build
-
-      - name: build with Spring Boot
-        run: sudo ./gradle bootJar
-
-      - name: run Spring Boot app
-        run: sudo ./gradle bootRun
+#      - name: check gradle version
+#        run: sudo ./gradlew -version
+#
+#      - name: build with gradle
+#        run: sudo ./gradlew build
+#
+#      - name: build with Spring Boot
+#        run: sudo ./gradle bootJar
+#
+#      - name: run Spring Boot app
+#        run: sudo ./gradle bootRun
 
 
