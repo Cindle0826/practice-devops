@@ -27,15 +27,15 @@ jobs:
         run: gradle -version
 
       - name: check gradle version
-        run: ./gradlew --version
+        run: sudo ./gradlew --version
 
       - name: build with gradle
-        run: ./gradlew build
+        run: sudo ./gradlew build
 
       - name: build with Spring Boot
-        run: ./gradle bootJar
+        run: sudo ./gradle bootJar
 
       - name: run Spring Boot app
-        run: ./gradle bootRun
+        run: sudo ./gradle bootRun
 
 
