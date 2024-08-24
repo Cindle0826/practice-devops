@@ -5,10 +5,12 @@ on:
 # 工作
 jobs:
   job1:
+    runs-on: ubuntu-latest
     steps:
       - run: pwd
       - run: ls
   job2:
+    runs-on: ubuntu-latest
     steps:
-      - run: node -v
+      - run: macos-latest
       - run: ./gradlew -v
