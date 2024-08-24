@@ -26,6 +26,9 @@ jobs:
       - name: check gradle version
         run: gradle -version
 
+      - name: Give gradlew execute permission
+        run: chmod +x ./gradlew
+
       - name: check gradlew version
         run: sudo gradlew --version
 
