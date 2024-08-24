@@ -3,7 +3,7 @@ on:
   push
 
 # 工作
-jbos:
+jobs:
   ci:
     runs-on: ubuntu-latest
     steps:
