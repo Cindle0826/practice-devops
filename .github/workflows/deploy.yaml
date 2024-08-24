@@ -26,8 +26,8 @@ jobs:
       - name: check gradle version
         run: gradle -version
 
-      - name: check gradle version
-        run: sudo ./gradlew --version
+      - name: check gradlew version
+        run: sudo gradlew --version
 
       - name: build with gradle
         run: sudo ./gradlew build
