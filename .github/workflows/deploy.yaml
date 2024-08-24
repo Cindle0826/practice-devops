@@ -26,19 +26,13 @@ jobs:
       - name: check gradle version
         run: gradle -version
 
-      - name: Give gradlew execute permission
-        run: chmod +x ./gradlew
-
-      - name: check gradlew version
-        run: sudo gradlew --version
-
       - name: build with gradle
-        run: sudo ./gradlew build
+        run: gradle build
 
       - name: build with Spring Boot
-        run: sudo ./gradle bootJar
+        run: gradle bootJar
 
       - name: run Spring Boot app
-        run: sudo ./gradle bootRun
+        run: gradle bootRun
 
 
