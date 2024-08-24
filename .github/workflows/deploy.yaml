@@ -2,6 +2,8 @@
 on:
   push
 
+permissions: write-all
+
 # 工作
 jobs:
   ci:
@@ -32,7 +34,35 @@ jobs:
       - name: build with Spring Boot
         run: gradle bootJar
 
+      # & 符號，在後台運行
       - name: run Spring Boot app
-        run: gradle bootRun
+        run: gradle bootRun &
+
+      - name: wait for app start
+        run: |
+          echo "waiting for spring boot to start"
+          sleep 30
+
+      #$(): 命令替換。它允許將命令的輸出用作另一個命令的參數。
+      #-ne: 數值比較運算符。它表示“不等於”，用於比較兩個數字。
+      #[]: 測試命令。用於評估條件表達式。
+
+      - name: Test app endpoints
+        run: |
+          STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}\n" http://localhost:8080/hello)
+          if [ "$STATUS_CODE" -ne 200 ]; then
+            echo "Application did not start successfully"
+            exit 1
+          fi
+          shell: bash
+
+      #lsof: 代表 "list open files"（列出打開的文件）。這是一個用於列出被進程打開的文件信息的命令。
+      #-t: 這個選項告訴 lsof 生成簡潔的輸出，只包括使用指定文件的進程 ID（PID）。
+      #-i: 這個選項用於選擇列出與指定的 Internet 地址匹配的文件。在這個例子中，-i:8080 指定與端口 8080 相關的文件。
+
+      - name: stop app
+        run: kill $(lsof -t -i:8080)
+        shell: bash
+
 
 
