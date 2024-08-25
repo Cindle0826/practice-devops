@@ -114,13 +114,18 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.7.0
+        uses: appleboy/ssh-action@v1.0.3
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            sudo docker pull my-image:latest
+            sudo docker stop my-container || true
+            sudo docker rm my-container || true
+            sudo docker run -d --name my-container my-image:latest
+            echo "deployment success~"
 
-      - name: Deploy to remote server
-        run: |
-          ssh -o StrictHostKeyChecking=no cindle@${{ secrets.SSH_REMOTE_SERVER }} 'bash -s' << 'EOF'
-            sudo docker pull yihao0826/practice-devops:latest
-            sudo docker run -d -p 8080:8080 yihao0826/practice-devops:latest
-          EOF
+
